@@ -49,6 +49,4 @@ food-banner-website/
 2. Open `index.html` in any modern web browser (Chrome, Firefox, Safari, Edge).
 3. Experience the responsive design by resizing your browser window or using developer tools to simulate different devices.
 
-## Author
 
-Developed as a responsive web design showcase.
