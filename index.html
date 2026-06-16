@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div id="loading-screen">
+      <div class="loader">
+        <div class="loader-circle"></div>
+        <img src="./images/burger.png" alt="Loading..." class="loader-img" />
+      </div>
+    </div>
     <main>
       <div class="image_container">
         <img src="./images/bg_image.png" alt="bg_image" />
@@ -69,6 +75,14 @@
       </div>
     </main>
     <script>
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("loading-screen");
+        setTimeout(() => {
+          loader.style.opacity = "0";
+          loader.style.visibility = "hidden";
+        }, 1000); // Give it a second to feel the "premium" loading
+      });
+
       document.addEventListener("mousemove", (e) => {
         const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
         const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
@@ -76,27 +90,22 @@
         // Move the background image slightly
         const bg = document.querySelector(".image_container img");
         if (bg) {
-          bg.style.transform = `scale(1.1) translate(${moveX * -0.5}px, ${moveY * -0.5}px)`;
+          bg.style.transform = `scale(1.1) translate(${moveX * -0.3}px, ${moveY * -0.3}px)`;
         }
 
         // Move food items at different speeds
         const items = [
-          { selector: ".burger", speed: 2 },
-          { selector: ".tomato-1", speed: 3 },
-          { selector: ".tomato-2", speed: 1.5 },
-          { selector: ".pizza", speed: 2.5 },
-          { selector: ".momo", speed: 1.8 },
-          { selector: ".leaf", speed: 4 }
+          { selector: ".burger", speed: 1.5 },
+          { selector: ".tomato-1", speed: 2.5 },
+          { selector: ".tomato-2", speed: 1.2 },
+          { selector: ".pizza", speed: 2 },
+          { selector: ".momo", speed: 1.4 },
+          { selector: ".leaf", speed: 3.5 }
         ];
 
         items.forEach(item => {
           const el = document.querySelector(item.selector);
           if (el) {
-            // Combine parallax with the existing float animation if possible, 
-            // but for simplicity, we'll just apply a transform.
-            // Note: This might conflict with the 'float' animation if not handled.
-            // To fix, we use a wrapper or apply the transform to a parent, 
-            // but here we'll just apply it directly.
             el.style.transform = `translate(${moveX * item.speed}px, ${moveY * item.speed}px)`;
           }
         });
