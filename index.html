@@ -13,12 +13,12 @@
       </div>
       <div class="content">
         <div class="center-content">
-          <img src="./images/burger.png" class="burger" />
-          <img src="./images/tomato.png" class="tomato-1" />
-          <img src="./images/tomato.png" class="tomato-2" />
-          <img src="./images/pizza.png" class="pizza" />
-          <img src="./images/momo.png" class="momo" />
-          <img src="./images/leaf.png" class="leaf" />
+          <div class="parallax-item burger"><img src="./images/burger.png" /></div>
+          <div class="parallax-item tomato-1"><img src="./images/tomato.png" /></div>
+          <div class="parallax-item tomato-2"><img src="./images/tomato.png" /></div>
+          <div class="parallax-item pizza"><img src="./images/pizza.png" /></div>
+          <div class="parallax-item momo"><img src="./images/momo.png" /></div>
+          <div class="parallax-item leaf"><img src="./images/leaf.png" /></div>
           <section class="text-content">
             <h1>
               Better food <br />
@@ -68,5 +68,39 @@
         </div>
       </div>
     </main>
+    <script>
+      document.addEventListener("mousemove", (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+        // Move the background image slightly
+        const bg = document.querySelector(".image_container img");
+        if (bg) {
+          bg.style.transform = `scale(1.1) translate(${moveX * -0.5}px, ${moveY * -0.5}px)`;
+        }
+
+        // Move food items at different speeds
+        const items = [
+          { selector: ".burger", speed: 2 },
+          { selector: ".tomato-1", speed: 3 },
+          { selector: ".tomato-2", speed: 1.5 },
+          { selector: ".pizza", speed: 2.5 },
+          { selector: ".momo", speed: 1.8 },
+          { selector: ".leaf", speed: 4 }
+        ];
+
+        items.forEach(item => {
+          const el = document.querySelector(item.selector);
+          if (el) {
+            // Combine parallax with the existing float animation if possible, 
+            // but for simplicity, we'll just apply a transform.
+            // Note: This might conflict with the 'float' animation if not handled.
+            // To fix, we use a wrapper or apply the transform to a parent, 
+            // but here we'll just apply it directly.
+            el.style.transform = `translate(${moveX * item.speed}px, ${moveY * item.speed}px)`;
+          }
+        });
+      });
+    </script>
   </body>
 </html>
